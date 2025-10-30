@@ -1,0 +1,58 @@
+<!-- Dhruvii Mehta -->
+<!-- Thursday, October 30, 2025 -->
+<!-- Task 4: Filtering the data -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Filtering the data</title>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <style>
+    body { font-family: Arial; margin: 20px; }
+    select, button { margin: 5px; }
+    #result div { margin: 5px 0; }
+  </style>
+</head>
+<body>
+  <h1>Filtering the data</h1>
+
+  <!-- category dropdown menu and button to select -->
+  <select id="categorySelect"></select>
+  <button id="filter">Filter</button>
+  <div id="result"></div>
+
+  <script>
+    let products = [];
+    /* loading the JSON products data, populating the categories */
+    $(document).ready(function() {
+      $.get("products.json", function(data) {
+        products = data;
+
+        /* get each category  */
+        let allCategories = new Set();
+        products.forEach(p => p.categories.forEach(c => allCategories.add(c)));
+
+        /* add each category to dropdown */
+        let select = $("#categorySelect");
+        allCategories.forEach(cat => {
+          select.append(`<option value="${cat}">${cat}</option>`);
+        });
+      });
+    });
+
+    /* when user clicks filter + selects category, show matching products */
+    $("#filter").click(function() {
+      const selected = $("#categorySelect").val();
+      const matches = products.filter(p => p.categories.includes(selected));
+
+      let output = "";
+      matches.forEach(p => {
+        output += `<div>${p.name}</div>`;
+      });
+
+      $("#result").html(output);
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,44 @@
+[
+  {
+    "name": "Tufts sweatshirt",
+    "description": "brown and blue Tufts merch",
+    "price": 85,
+    "categories": ["clothing", "college"]
+  },
+  {
+    "name": "Study lamp",
+    "description": "warm light, dimmable bedside or table lamp",
+    "price": 18,
+    "categories": ["home", "decor"]
+  },
+  {
+    "name": "JBL bluetooth speaker",
+    "description": "Portable speaker with long battery life",
+    "price": 50,
+    "categories": ["electronics", "music"]
+  },
+  {
+    "name": "Yoga Mat",
+    "description": "Non-slip, pink-colored yoga mat",
+    "price": 25,
+    "categories": ["fitness", "wellness"]
+  },
+  {
+    "name": "AirPods",
+    "description": "wireless noise-cancelling headphones",
+    "price": 225,
+    "categories": ["noise-cancelling", "wireless"]
+  },
+  {
+    "name": "Floral socks",
+    "description": "hand embroidered, colorful fun socks",
+    "price": 20,
+    "categories": ["floral", "clothing"]
+  },
+  {
+    "name": "Cook book: Vegetarian Recipes",
+    "description": "vegetarian recipes for beginners learning to cook",
+    "price": 25,
+    "categories": ["vegan", "vegetarian", "cooking", "wellness"]
+  }
+]

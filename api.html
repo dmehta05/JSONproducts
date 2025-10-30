@@ -1,0 +1,99 @@
+<!-- Dhruvii Mehta -->
+<!-- Thursday, October 30, 2025 -->
+<!-- Part 2 API -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Part 2 API's</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #fff9f2;
+      padding: 20px;
+      text-align: center;
+    }
+    h1 {
+      color: #d35400;
+    }
+    input, button {
+      padding: 8px;
+      margin: 5px;
+      font-size: 16px;
+    }
+    .meal {
+      background: #ffe7cd;
+      border-radius: 10px;
+      margin: 20px auto;
+      padding: 15px;
+      width: 60%;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+      text-align: left;
+    }
+    img {
+      max-width: 100%;
+      border-radius: 8px;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>TheMealDB Recipe Finder</h1>
+  <p>Type a meal name below to search for recipes (e.g., "salad")</p>
+
+  <input type="text" id="mealInput" placeholder="Enter meal name">
+  <button id="searchBtn">Search</button>
+  <div id="result"></div>
+  <hr>
+  <h2>About This API</h2>
+  <p>
+    <strong>API:</strong> TheMealDB (<a href="https://www.themealdb.com/api.php" target="_blank">theMealDB.com</a>)<br>
+    <strong>Why I chose it:</strong> I love that it returns complete recipes, ingredients, and meal photos. It’s a fun and useful API for anyone who likes cooking or meal planning.<br>
+    <strong>Parameter used:</strong> the meal name <br>
+    <strong>Example use case:</strong> This API could be used for a meal search feature for a recipe app, letting users quickly find ingredients and instructions for any dish.
+  </p>
+
+  <script>
+    const searchBtn = document.getElementById('searchBtn');
+    const resultDiv = document.getElementById('result');
+
+    searchBtn.addEventListener('click', async () => {
+      const mealName = document.getElementById('mealInput').value.trim();
+      if (!mealName) {
+        resultDiv.innerHTML = "<p>Please enter a meal name!</p>";
+        return;
+      }
+
+      const url = `https://www.themealdb.com/api/json/v1/1/search.php?s=${mealName}`;
+      try {
+        const response = await fetch(url);
+        const data = await response.json();
+
+        if (!data.meals) {
+          resultDiv.innerHTML = "<p>No meals found. Try another name!</p>";
+          return;
+        }
+
+        resultDiv.innerHTML = "";
+        data.meals.forEach(meal => {
+          const mealHTML = `
+            <div class="meal">
+              <h2>${meal.strMeal}</h2>
+              <img src="${meal.strMealThumb}" alt="${meal.strMeal}">
+              <p><strong>Category:</strong> ${meal.strCategory}</p>
+              <p><strong>Area:</strong> ${meal.strArea}</p>
+              <p><strong>Instructions:</strong> ${meal.strInstructions.substring(0, 200)}...</p>
+              <a href="${meal.strSource || '#'}" target="_blank">Full recipe</a>
+            </div>
+          `;
+          resultDiv.innerHTML += mealHTML;
+        });
+      } catch (error) {
+        resultDiv.innerHTML = "<p>Error fetching data. Please try again later.</p>";
+      }
+    });
+  </script>
+
+</body>
+</html>
